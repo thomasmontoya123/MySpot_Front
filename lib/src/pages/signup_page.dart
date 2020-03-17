@@ -236,23 +236,20 @@ class _SignUpState extends State<SignUp> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           title: Text('Bienvenido'),
           content: Column(
-          mainAxisSize: MainAxisSize.min, 
-          children: <Widget>[
-            FlutterLogo(size: 100)
-          ], 
+            mainAxisSize: MainAxisSize.min, 
+            children: <Widget>[
+              FlutterLogo(size: 100)
+            ], 
           ),
           actions: <Widget>[
             FlatButton(
               child: Text('Ok'),
-              onPressed: () => Navigator.pushNamed(context, '/'), 
+              onPressed: () => Navigator.pushNamed(context, '/loged'), 
               )
           ],
         );
-
       }
     );
   }
-
-
 
 }

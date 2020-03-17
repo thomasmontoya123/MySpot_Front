@@ -195,7 +195,7 @@ class _LoginState extends State<Login> {
           actions: <Widget>[
             FlatButton(
               child: Text('Ok'),
-              onPressed: () => Navigator.pushNamed(context, '/'), 
+              onPressed: () => Navigator.pushNamed(context, '/loged'), 
               )
           ],
         );

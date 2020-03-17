@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   
   static const LatLng _initialCoordinates =
       const LatLng(6.2461091, -75.5716757);
-  final Set<Marker> _markers = {};
+
   LatLng _lastPosition = _initialCoordinates;
   MapType _currentMapType = MapType.normal;
 
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
             initialCameraPosition:
                 CameraPosition(target: _initialCoordinates, zoom: 11.0),
             mapType: _currentMapType,
-            markers: _markers,
+            markers: _createParkings(),
             onCameraMove: _onCameraMove,
           ),
           // Container(
@@ -171,6 +171,48 @@ class _HomePageState extends State<HomePage> {
     var body = jsonDecode(response.body)['data'][0]['parkingName'];
 
     print(body);
+  }
+
+  Set<Marker> _createParkings() {
+
+    final Set<Marker> _markers = {};
+
+    LatLng _park2 = LatLng(6.256176, -75.591675);
+    LatLng _park1 = LatLng(6.258064, -75.591203);
+    LatLng _park0 = LatLng(6.259781, -75.588939);
+
+
+    _markers.add(Marker(
+        markerId: MarkerId('mockParkingLot0'),
+        position: _park0,
+        icon: BitmapDescriptor.defaultMarker,
+        infoWindow: InfoWindow(
+          title: 'Parqueadero estadio',
+          snippet: 'Horario: 7:00am - 11:00pm'
+        ),
+      ));
+
+    _markers.add(Marker(
+        markerId: MarkerId('mockParkingLot1'),
+        position: _park1,
+        infoWindow: InfoWindow(
+          title: 'Parqueadero obelisco',
+          snippet: 'Horario: 7:00am - 11:00pm'
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      ));
+
+    _markers.add(Marker(
+        markerId: MarkerId('mockParkingLot2'),
+        position: _park2,
+        infoWindow: InfoWindow(
+          title: 'Parqueadero cancha',
+          snippet: 'Horario: 7:00am - 11:00pm'
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      ));
+
+    return _markers;
   }
 
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_spot/src/pages/home_page.dart';
 import 'package:my_spot/src/pages/login_page.dart';
 import 'package:my_spot/src/pages/signup_page.dart';
+import 'package:my_spot/src/pages/user_loged_page.dart';
 
 Map<String, WidgetBuilder> getRoutes(){
 
@@ -10,6 +11,7 @@ Map<String, WidgetBuilder> getRoutes(){
     '/login'  : (context) => Login(),
     '/signup' : (context) => SignUp(),
     '/book'   : (context) => SignUp(),
+    '/loged'  : (context) => UserLoged(),
 
   };
 
