@@ -254,7 +254,7 @@ class _UserLogedState extends State<UserLoged> {
     DatePicker.showDateTimePicker(context,
       showTitleActions: true,
       minTime: DateTime.now(),
-      maxTime: DateTime(2019, 6, 7), onChanged: (date) {
+      maxTime: DateTime(2020, 6, 7), onChanged: (date) {
         print('change $date');
       }, onConfirm: (date) {
         print('confirm $date');

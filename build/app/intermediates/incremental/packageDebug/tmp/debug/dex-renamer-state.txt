@@ -1,4 +1,4 @@
-#Mon Mar 16 19:58:49 COT 2020
+#Wed Mar 18 10:51:25 COT 2020
 base.0=/Users/thomas/Documents/github/my_spot/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
