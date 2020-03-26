@@ -1,9 +1,20 @@
-import 'dart:convert';
+//  Home page, root screen
+//  map creation, markers fetch 
+//  search box
+//  redirection to login 
+//  map style changer
 
+
+
+// dart imports
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:http/http.dart';
+
+// External Packages imports
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:geolocator/geolocator.dart';
-import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/directions.dart';
 import 'package:google_maps_webservice/distance.dart';
@@ -11,7 +22,6 @@ import 'package:google_maps_webservice/geocoding.dart';
 import 'package:google_maps_webservice/geolocation.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_maps_webservice/timezone.dart';
-import 'package:http/http.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -20,13 +30,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String heroTag = '';
+  String heroTag = ''; // buttons id 
   String searchAddr = '';
 
   Completer<GoogleMapController> _controller = Completer();
   GoogleMapController mapController;
 
-  
+  // Initial point for the map
   static const LatLng _initialCoordinates =
       const LatLng(6.2461091, -75.5716757);
 
@@ -52,26 +62,7 @@ class _HomePageState extends State<HomePage> {
             markers: _createParkings(),
             onCameraMove: _onCameraMove,
           ),
-          // Container(
-          //   padding: EdgeInsets.only(top: 16.0, right: 90.0, left: 20.0),
-          //   child: TextField(
-          //     decoration: InputDecoration(
-          //       filled: true,
-          //       fillColor: Colors.blueGrey,
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(20.0),
-          //       ),
-          //       hintText: 'Search',
-          //       labelText: 'Spot',
-          //       labelStyle: TextStyle(color: Colors.white),
-          //     ),
-          //     onChanged: (value) {
-          //       setState(() {
-          //         searchAddr = value;
-          //       });
-          //     },
-          //   ),
-          // ),
+          
           Padding(
             padding: EdgeInsets.all(16.0),
             child: Align(
@@ -83,8 +74,6 @@ class _HomePageState extends State<HomePage> {
                   button(_onMapTypeButtonPressed, Icons.map, 'mapTypeTag'),
                   SizedBox(height: 16.0),
                   button(_loginNavigate, Icons.account_circle, 'loginTag'),
-                  // button(_onAddMarkerButtonPressed, Icons.location_on, 'addMarkerTag'),
-                  // SizedBox(height: 16.0),
                 ],
               ),
             ),
@@ -95,6 +84,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _onMapCreated(GoogleMapController controller) {
+    //  Actions to execute at the initial opening
     _getparkinLots();
     _controller.complete(controller);
   }
@@ -104,6 +94,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget button(Function function, IconData icon, String heroTag) {
+    // Creates the buttons on the right of the screen
+
     return FloatingActionButton(
       heroTag: heroTag,
       child: Icon(
@@ -117,6 +109,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   _onMapTypeButtonPressed() {
+    // change the map style from normal to satellite
+    //  and from satellite to normal
+
     setState(() {
       _currentMapType = _currentMapType == MapType.normal
           ? MapType.satellite
@@ -126,22 +121,9 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // _onAddMarkerButtonPressed(){
-  //   setState(() {
-  //     _markers.add(Marker(
-  //       markerId: MarkerId(_lastPosition.toString()),
-  //       position: _lastPosition,
-  //       infoWindow: InfoWindow(
-  //         title: 'my first parking lot',
-  //         snippet: 'This is a snippet'
-  //       ),
-  //       icon: BitmapDescriptor.defaultMarker,
-  //     ));
-  //   });
-  // }
-
   buttonSearch() async{
-    
+    // Search box autocomplete sugestions
+
     Prediction p = await PlacesAutocomplete.show(
       context: context,
       apiKey: 'AIzaSyAXNenEkYbjszRhFM44TKHK1odiQr0-M9k',
@@ -151,20 +133,17 @@ class _HomePageState extends State<HomePage> {
         Component(Component.country, 'col')
       ]
     );
-    // print(searchAddr);
-    // Geolocator().placemarkFromAddress(searchAddr).then((result) {
-    //   mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-    //       target:
-    //           LatLng(result[0].position.latitude, result[0].position.longitude),
-    //       zoom: 10.0)));
-    // });
-    }
+  }
 
   _loginNavigate() {
+    // Navigate to the login page
+
     Navigator.pushNamed(context, '/login');
   }
 
   _getparkinLots()async{
+    // Fetch data from the API
+
     String url = 'http://18.233.97.235:3000/api/v1/main/';
     Response response = await get(url);
 
@@ -174,6 +153,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Set<Marker> _createParkings() {
+    // Create markers for the map 
 
     final Set<Marker> _markers = {};
 

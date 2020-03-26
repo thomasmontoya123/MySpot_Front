@@ -1,6 +1,6 @@
+// Create account page
+
 import 'dart:convert';
-
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -19,7 +19,7 @@ class _SignUpState extends State<SignUp> {
 
 
 
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(); //Allow us to validate the data in the front end
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +57,8 @@ class _SignUpState extends State<SignUp> {
   }
 
   Widget _emailInput(){
+    // Email input field 
+
     return TextFormField( 
       validator: (value) {
         if (value.isEmpty) {
@@ -89,6 +91,8 @@ class _SignUpState extends State<SignUp> {
   }
 
   _passwordInput() {
+    // Password input field 
+
     return TextFormField(
       validator: (value) {
         if (value.isEmpty) {
@@ -118,6 +122,8 @@ class _SignUpState extends State<SignUp> {
 
 
   Widget _submitButton(BuildContext context){
+    // Validates the data and if everything is ok, send the data to the API
+
     return ButtonTheme(
         minWidth: 90.0,
         height: 40.0,
@@ -151,7 +157,9 @@ class _SignUpState extends State<SignUp> {
   }
 
   _phoneInput() {
-  return TextFormField( 
+    // Phone input field 
+
+    return TextFormField( 
       validator: (value) {
         if (value.isEmpty) {
           return 'Ingres su telefon';
@@ -183,6 +191,8 @@ class _SignUpState extends State<SignUp> {
   }
 
   _nameInput() {
+    // Name input text field (splited for the last name)
+
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       validator: (value) {
@@ -218,6 +228,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   String _validNumberChecker(String value){
+    // Checks if the first digit of the number is a valid number for the country 
 
     if (value[0] != '3'){
       return 'Ingrese un telefono valido';
@@ -227,6 +238,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   void _showAlert(BuildContext context){
+    // If everything is ok shows a welcome alert and takes the user to new home page
     showDialog(
       context: context,
       barrierDismissible: true,

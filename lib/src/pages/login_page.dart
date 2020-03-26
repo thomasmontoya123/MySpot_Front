@@ -1,5 +1,8 @@
-import 'dart:convert';
+// Login Screen
+// Login form and front validation
 
+
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -9,7 +12,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(); //Allow us verify on the front end the input data
 
   String _mail = '';
   String _password = '';
@@ -54,6 +57,8 @@ class _LoginState extends State<Login> {
   }
 
   Widget _emailInput(){
+    //  mail field 
+
     return TextFormField( 
       validator: (value) {
         if (value.isEmpty) {
@@ -85,6 +90,8 @@ class _LoginState extends State<Login> {
   }
 
   _passwordInput() {
+    // Password field
+
     return TextFormField(
       validator: (value) {
         if (value.isEmpty) {
@@ -113,6 +120,8 @@ class _LoginState extends State<Login> {
 
 
   Widget _submitButton(BuildContext context){
+    //  Submit button, validates the data and makes the request to the API
+
     return ButtonTheme(
         minWidth: 90.0,
         height: 40.0,
@@ -157,6 +166,8 @@ class _LoginState extends State<Login> {
   }
 
   _navigateToSignup(){
+    // Allows the user navigate to another screen
+
     return ButtonTheme(
         minWidth: 90.0,
         height: 40.0,
@@ -178,6 +189,8 @@ class _LoginState extends State<Login> {
 
 
   void _showAlert(BuildContext context){
+    // Display a welcome alert if the API response is OK
+
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -195,6 +208,7 @@ class _LoginState extends State<Login> {
           actions: <Widget>[
             FlatButton(
               child: Text('Ok'),
+              //Takes the user to the new home screen with the booked option enabled
               onPressed: () => Navigator.pushNamed(context, '/loged'), 
               )
           ],
@@ -205,6 +219,8 @@ class _LoginState extends State<Login> {
   }
 
   void _showAlertNoUserFound(BuildContext context){
+    // Show an error alert if the API response says that the user don't exist
+
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -222,6 +238,7 @@ class _LoginState extends State<Login> {
           actions: <Widget>[
             FlatButton(
               child: Text('Ok'),
+              // Take the user to the sign up screen
               onPressed: () => Navigator.pushNamed(context, '/signup'), 
               )
           ],
@@ -232,6 +249,8 @@ class _LoginState extends State<Login> {
   }
 
   void _showAlertIncorrectdata(BuildContext context){
+    // If the password is wrong shows an alert
+
     showDialog(
       context: context,
       barrierDismissible: true,

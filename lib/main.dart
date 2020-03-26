@@ -1,3 +1,7 @@
+// Initialize the app and the app context 
+// set the initial route
+// Set the theme style for the entire app
+
 import 'package:flutter/material.dart';
 import 'package:my_spot/src/routes/routes.dart';
 

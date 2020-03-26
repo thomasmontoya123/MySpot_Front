@@ -1,4 +1,11 @@
+// Route generator for the app 
+// Handles the context for the navigation
+
+
+// Dart imports
 import 'package:flutter/material.dart';
+
+// Pages import
 import 'package:my_spot/src/pages/home_page.dart';
 import 'package:my_spot/src/pages/login_page.dart';
 import 'package:my_spot/src/pages/signup_page.dart';
